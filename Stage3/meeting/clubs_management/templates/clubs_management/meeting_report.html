@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Meeting Report</h2>
+
+<form method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Generate Report</button>
+</form>
+
+{% if report_data %}
+    <h3>Report Results</h3>
+    <ul>
+        <li>Average Duration: {{ report_data.average_duration }}</li>
+        <li>Average Invited Count: {{ report_data.average_invited_count|default:"No Data" }}</li>
+        <li>Average Accepted Count: {{ report_data.average_accepted_count|default:"No Data" }}</li>
+        <li>Average Attendance Rate: {{ report_data.average_attendance_rate|default:"No Data" }}</li>
+    </ul>
+{% endif %}
+{% endblock %}
